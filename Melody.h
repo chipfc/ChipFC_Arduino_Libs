@@ -10,6 +10,10 @@
 #ifndef Melody_h
 #define Melody_h
 
+#define MARIO_THEME_MELODY      1
+#define MARIO_UNDERWORLD_MELODY 2
+#define HAPPY_BIRTHDAY          3
+
 class Melody
 {
   public:

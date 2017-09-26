@@ -17,7 +17,10 @@ Melody::Melody(int pin)
   _pin = pin;
 }
 
-int melody[] = {
+/*
+ * MARIO_THEME_MELODY
+ */
+int mario_theme_melody[] = {
   NOTE_E7,  NOTE_E7,  0,        NOTE_E7,
   0,        NOTE_C7,  NOTE_E7,  0,
   NOTE_G7,  0,        0,        0,
@@ -44,9 +47,7 @@ int melody[] = {
   NOTE_D7,  NOTE_B6,  0,        0
 };
 
-//tạo tốc độ giai điệu
-
-int tempo[] = {
+int mario_theme_tempo[] = {
   12, 12, 12, 12,
   12, 12, 12, 12,
   12, 12, 12, 12,
@@ -73,9 +74,10 @@ int tempo[] = {
   12, 12, 12, 12,
 };
 
-//Underworld giai điệu
-
-int underworld_melody[] = {
+/*
+ * MARIO_UNDERWORLD_MELODY
+ */
+int mario_underworld_melody[] = {
   NOTE_C4,  NOTE_C5,  NOTE_A3,  NOTE_A4,
   NOTE_AS3, NOTE_AS4, 0,
   0,
@@ -95,12 +97,9 @@ int underworld_melody[] = {
   NOTE_GS4, NOTE_DS4, NOTE_B3,
   NOTE_AS3, NOTE_A3,  NOTE_GS3,
   0,        0,        0
-
 };
 
-//Underwolrd tempo
-
-int underworld_tempo[] = {
+int mario_underworld_tempo[] = {
   12, 12, 12, 12,
   12, 12, 6,
   3,
@@ -122,137 +121,68 @@ int underworld_tempo[] = {
   3,  3,  3
 };
 
+// notes in the melody:
+int happy_birthday_melody[]= {
+  NOTE_G3,  NOTE_G3, NOTE_A3, NOTE_G3,  NOTE_C4, NOTE_B3,
+  NOTE_G3,  NOTE_G3, NOTE_A3, NOTE_G3,  NOTE_D4, NOTE_C4,
+  NOTE_G3,  NOTE_G3, NOTE_G4, NOTE_E4,  NOTE_C4, NOTE_B3,   NOTE_A3,
+  NOTE_F4,  NOTE_F4, NOTE_E4, NOTE_C4,  NOTE_D4, NOTE_C4 
+};
+  // note durations: 4 = quarter note, 8 = eighth note, etc.:
+int happy_birthday_tempo[] = { 
+  8,8,4,4,4,2,
+  8,8,4,4,4,2,
+  8,8,4,4,4,4,3,
+  8,8,4,4,4,2 
+};
 
 void Melody::sing(int song) {
 
-  // iterate over the notes of the melody:
-
   _song = song;
 
-  if (_song == 2) {
-
-    //Serial.println(" ‘Underworld Theme'");
-
-    int size = sizeof(underworld_melody) / sizeof(int);
-
+  if (_song == MARIO_UNDERWORLD_MELODY) {
+    int size = sizeof(mario_underworld_melody) / sizeof(int);
     for (int thisNote = 0; thisNote < size; thisNote++) {
-
- 
-
-      // to calculate the note duration, take one second
-
-      // divided by the note type.
-
-      //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
-
-      int noteDuration = 1000 / underworld_tempo[thisNote];
-
- 
-
-      buzz(_pin, underworld_melody[thisNote], noteDuration);
-
- 
-
-      // to distinguish the notes, set a minimum time between them.
-
-      // the note’s duration + 30% seems to work well:
-
+      int noteDuration = 1000 / mario_underworld_tempo[thisNote];
+      buzz(_pin, mario_underworld_melody[thisNote], noteDuration);
       int pauseBetweenNotes = noteDuration * 1.30;
-
       delay(pauseBetweenNotes);
-
- 
-
-      // stop the tone playing:
-
       buzz(_pin, 0, noteDuration);
-
- 
-
     }
-
- 
-
-  } else {
-
- 
-
-    Serial.println("Mario Theme");
-
-    int size = sizeof(melody) / sizeof(int);
-
+  } else if (_song == MARIO_THEME_MELODY){
+    int size = sizeof(mario_theme_melody) / sizeof(int);
     for (int thisNote = 0; thisNote < size; thisNote++) {
-
- 
-
-      // to calculate the note duration, take one second
-
-      // divided by the note type.
-
-      //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
-
-      int noteDuration = 1000 / tempo[thisNote];
-
- 
-
-      buzz(_pin, melody[thisNote], noteDuration);
-
- 
-
-      // to distinguish the notes, set a minimum time between them.
-
-      // the note’s duration + 30% seems to work well:
-
+      int noteDuration = 1000 / mario_theme_tempo[thisNote];
+      buzz(_pin, mario_theme_melody[thisNote], noteDuration);
       int pauseBetweenNotes = noteDuration * 1.30;
-
       delay(pauseBetweenNotes);
-
- 
-
-      // stop the tone playing:
-
       buzz(_pin, 0, noteDuration);
-
- 
-
     }
-
+  } else if (_song == HAPPY_BIRTHDAY){
+    int size = sizeof(happy_birthday_melody) / sizeof(int);
+    for (int thisNote = 0; thisNote < size; thisNote++) {
+      int noteDuration = 1000 / happy_birthday_tempo[thisNote];
+      buzz(_pin, happy_birthday_melody[thisNote], noteDuration);
+      int pauseBetweenNotes = noteDuration * 1.30;
+      delay(pauseBetweenNotes);
+      buzz(_pin, 0, noteDuration);
+    }
   }
-
 }
-
- 
 
 void Melody::buzz(int targetPin, long frequency, long length) {
 
   digitalWrite(13, HIGH); 
 
-  long delayValue = 1000000/ frequency / 2; // calculate the delay value between transitions
-
-  //// 1 second’s worth of microseconds, divided by the frequency, then split in half since
-
-  //// there are two phases to each cycle
-
+  long delayValue = 1000000/ frequency / 2;   // calculate the delay value between transitions
   long numCycles = frequency * length / 1000; // calculate the number of cycles for proper timing
 
-  //// multiply frequency, which is really cycles per second, by the number of seconds to
-
-  //// get the total number of cycles to produce
-
-  for (long i = 0; i < numCycles; i++) { // for the calculated length of time…
-
-    digitalWrite(targetPin, HIGH); // write the buzzer pin high to push out the diaphram
-
-    delayMicroseconds(delayValue); // wait for the calculated delay value
-
-    digitalWrite(targetPin, LOW); // write the buzzer pin low to pull back the diaphram
-
-    delayMicroseconds(delayValue); // wait again or the calculated delay value
-
+  for (long i = 0; i < numCycles; i++) {
+    digitalWrite(targetPin, HIGH);            // write the buzzer pin high to push out the diaphram
+    delayMicroseconds(delayValue);            // wait for the calculated delay value
+    digitalWrite(targetPin, LOW);             // write the buzzer pin low to pull back the diaphram
+    delayMicroseconds(delayValue);            // wait again or the calculated delay value
   }
 
   digitalWrite(13, LOW);
-
- 
-
 }

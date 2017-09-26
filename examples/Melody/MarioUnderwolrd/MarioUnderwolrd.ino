@@ -9,7 +9,7 @@
 
 #include <Melody.h>
 
-Melody mario_melody(13);
+Melody mario_melody(2);
 
 void setup()
 {
@@ -17,7 +17,7 @@ void setup()
 
 void loop()
 {
-  mario_melody.sing(2);
-  delay(3000);
+  mario_melody.sing(MARIO_UNDERWORLD_MELODY);
+  delay(1000);
 }
 

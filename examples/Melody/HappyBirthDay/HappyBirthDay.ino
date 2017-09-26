@@ -9,7 +9,7 @@
 
 #include <Melody.h>
 
-Melody mario_melody(2);
+Melody melody(2);
 
 void setup()
 {
@@ -17,7 +17,7 @@ void setup()
 
 void loop()
 {
-  mario_melody.sing(MARIO_THEME_MELODY);
+  melody.sing(HAPPY_BIRTHDAY);
   delay(1000);
 }
 
