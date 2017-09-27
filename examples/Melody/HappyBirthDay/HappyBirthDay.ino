@@ -9,7 +9,9 @@
 
 #include <Melody.h>
 
-Melody melody(2);
+int buzzer_pin = 2;
+
+Melody melody(buzzer_pin);
 
 void setup()
 {

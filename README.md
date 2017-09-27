@@ -10,4 +10,5 @@ Danh sách các bài nhạc có sẵn trong thư viện:
 * Mario Theme Song
 * Mario Underworld
 * Happy Birthday
-* Chu Ech Con
+* Chú Ếch Con
+* Cháu Lên Ba

@@ -155,6 +155,21 @@ int chu_ech_con_tempo[] = {
   8,8,8,8,4,4,8,8,8,8,3
 };
 
+/*
+ * CHAU_LEN_BA
+ */
+int chau_len_ba_melody[]= {
+  NOTE_A3,NOTE_G3,NOTE_F3,NOTE_G3,NOTE_F3,NOTE_G3,NOTE_A3,NOTE_G3,NOTE_G3,NOTE_A3,NOTE_F3,NOTE_A3,NOTE_G3,NOTE_A3,NOTE_F3,
+  NOTE_G3,NOTE_A3,NOTE_F3,NOTE_C3,NOTE_C3,NOTE_F3,NOTE_G3,NOTE_A3,NOTE_G3,NOTE_F3,NOTE_F3,NOTE_A3,NOTE_G3,NOTE_F3,
+  NOTE_G3,NOTE_A3,NOTE_F3,NOTE_C3,NOTE_A3,NOTE_G3,NOTE_F3,NOTE_C3,NOTE_C3,NOTE_A3,NOTE_G3,NOTE_F3
+};
+
+int chau_len_ba_tempo[] = { 
+  4,4,3,8,4,4,2,4,4,4,8,8,4,4,2,
+  4,4,4,8,8,4,4,3,8,4,4,4,8,8,
+  4,4,3,8,4,4,4,8,8,4,4,2
+};
+
 void Melody::sing(int song) {
 
   _song = song;
@@ -198,6 +213,16 @@ void Melody::sing(int song) {
         for (int thisNote = 0; thisNote < size; thisNote++) {
           noteDuration = 1000 / chu_ech_con_tempo[thisNote];
           buzz(_pin, chu_ech_con_melody[thisNote], noteDuration);
+          pauseBetweenNotes = noteDuration * 1.30;
+          delay(pauseBetweenNotes);
+          buzz(_pin, 0, noteDuration);
+        }
+        break;
+    case CHAU_LEN_BA:
+        size = sizeof(chau_len_ba_melody) / sizeof(int);
+        for (int thisNote = 0; thisNote < size; thisNote++) {
+          noteDuration = 1000 / chau_len_ba_tempo[thisNote];
+          buzz(_pin, chau_len_ba_melody[thisNote], noteDuration);
           pauseBetweenNotes = noteDuration * 1.30;
           delay(pauseBetweenNotes);
           buzz(_pin, 0, noteDuration);

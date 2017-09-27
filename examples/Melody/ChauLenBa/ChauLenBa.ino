@@ -19,7 +19,7 @@ void setup()
 
 void loop()
 {
-  mario_melody.sing(MARIO_UNDERWORLD_MELODY);
-  delay(1000);
+  melody.sing(CHAU_LEN_BA);
+  delay(500);
 }
 

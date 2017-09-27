@@ -14,7 +14,7 @@
 #define MARIO_UNDERWORLD_MELODY 2
 #define HAPPY_BIRTHDAY          3
 #define CHU_ECH_CON             4
-
+#define CHAU_LEN_BA             5
 
 class Melody
 {
