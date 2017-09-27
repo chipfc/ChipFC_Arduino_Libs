@@ -13,6 +13,8 @@
 #define MARIO_THEME_MELODY      1
 #define MARIO_UNDERWORLD_MELODY 2
 #define HAPPY_BIRTHDAY          3
+#define CHU_ECH_CON             4
+
 
 class Melody
 {

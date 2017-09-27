@@ -136,37 +136,71 @@ int happy_birthday_tempo[] = {
   8,8,4,4,4,2 
 };
 
+
+int chu_ech_con_melody[]= {
+  NOTE_C3,NOTE_A3,NOTE_G3,NOTE_A3,NOTE_C4,NOTE_A3,NOTE_C4,NOTE_G3,NOTE_F3,NOTE_G3,NOTE_A3,
+  NOTE_C3,NOTE_F3,NOTE_D3,NOTE_C3,NOTE_D3,NOTE_F3,NOTE_C3,NOTE_F3,NOTE_A3,NOTE_G3,NOTE_F3,NOTE_F3,
+  NOTE_G3,NOTE_C4,NOTE_C4,NOTE_D4,NOTE_C4,NOTE_B3,NOTE_G3,NOTE_C4,NOTE_C4,NOTE_D4,NOTE_C4,NOTE_B3,
+  NOTE_A3,NOTE_A3,NOTE_C4,NOTE_A3,NOTE_G3,NOTE_D3,NOTE_G3,NOTE_G3,NOTE_A3,NOTE_G3,NOTE_F3
+};
+
+int chu_ech_con_tempo[] = { 
+  8,8,8,8,8,4,4,8,8,8,8,
+  3,8,8,8,8,8,4,4,8,8,8,8,
+  2,8,8,8,8,4,4,8,8,8,8,2,
+  8,8,8,8,4,4,8,8,8,8,3
+};
+
 void Melody::sing(int song) {
 
   _song = song;
+  int size, noteDuration, pauseBetweenNotes;
 
-  if (_song == MARIO_UNDERWORLD_MELODY) {
-    int size = sizeof(mario_underworld_melody) / sizeof(int);
-    for (int thisNote = 0; thisNote < size; thisNote++) {
-      int noteDuration = 1000 / mario_underworld_tempo[thisNote];
-      buzz(_pin, mario_underworld_melody[thisNote], noteDuration);
-      int pauseBetweenNotes = noteDuration * 1.30;
-      delay(pauseBetweenNotes);
-      buzz(_pin, 0, noteDuration);
-    }
-  } else if (_song == MARIO_THEME_MELODY){
-    int size = sizeof(mario_theme_melody) / sizeof(int);
-    for (int thisNote = 0; thisNote < size; thisNote++) {
-      int noteDuration = 1000 / mario_theme_tempo[thisNote];
-      buzz(_pin, mario_theme_melody[thisNote], noteDuration);
-      int pauseBetweenNotes = noteDuration * 1.30;
-      delay(pauseBetweenNotes);
-      buzz(_pin, 0, noteDuration);
-    }
-  } else if (_song == HAPPY_BIRTHDAY){
-    int size = sizeof(happy_birthday_melody) / sizeof(int);
-    for (int thisNote = 0; thisNote < size; thisNote++) {
-      int noteDuration = 1000 / happy_birthday_tempo[thisNote];
-      buzz(_pin, happy_birthday_melody[thisNote], noteDuration);
-      int pauseBetweenNotes = noteDuration * 1.30;
-      delay(pauseBetweenNotes);
-      buzz(_pin, 0, noteDuration);
-    }
+  switch(_song){
+    case MARIO_UNDERWORLD_MELODY:
+      size = sizeof(mario_underworld_melody) / sizeof(int);
+      for (int thisNote = 0; thisNote < size; thisNote++) {
+        noteDuration = 1000 / mario_underworld_tempo[thisNote];
+        buzz(_pin, mario_underworld_melody[thisNote], noteDuration);
+        pauseBetweenNotes = noteDuration * 1.30;
+        delay(pauseBetweenNotes);
+        buzz(_pin, 0, noteDuration);
+      }
+      break;
+
+    case MARIO_THEME_MELODY:
+        size = sizeof(mario_theme_melody) / sizeof(int);
+        for (int thisNote = 0; thisNote < size; thisNote++) {
+          noteDuration = 1000 / mario_theme_tempo[thisNote];
+          buzz(_pin, mario_theme_melody[thisNote], noteDuration);
+          pauseBetweenNotes = noteDuration * 1.30;
+          delay(pauseBetweenNotes);
+          buzz(_pin, 0, noteDuration);
+        }
+        break;
+
+    case HAPPY_BIRTHDAY:
+        size = sizeof(happy_birthday_melody) / sizeof(int);
+        for (int thisNote = 0; thisNote < size; thisNote++) {
+          noteDuration = 1000 / happy_birthday_tempo[thisNote];
+          buzz(_pin, happy_birthday_melody[thisNote], noteDuration);
+          pauseBetweenNotes = noteDuration * 1.30;
+          delay(pauseBetweenNotes);
+          buzz(_pin, 0, noteDuration);
+        }
+        break;
+    case CHU_ECH_CON:
+        size = sizeof(chu_ech_con_melody) / sizeof(int);
+        for (int thisNote = 0; thisNote < size; thisNote++) {
+          noteDuration = 1000 / chu_ech_con_tempo[thisNote];
+          buzz(_pin, chu_ech_con_melody[thisNote], noteDuration);
+          pauseBetweenNotes = noteDuration * 1.30;
+          delay(pauseBetweenNotes);
+          buzz(_pin, 0, noteDuration);
+        }
+        break;
+    default:
+        break;
   }
 }
 
