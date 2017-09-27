@@ -121,14 +121,16 @@ int mario_underworld_tempo[] = {
   3,  3,  3
 };
 
-// notes in the melody:
+/*
+ * HAPPY_BIRTHDAY
+ */
 int happy_birthday_melody[]= {
   NOTE_G3,  NOTE_G3, NOTE_A3, NOTE_G3,  NOTE_C4, NOTE_B3,
   NOTE_G3,  NOTE_G3, NOTE_A3, NOTE_G3,  NOTE_D4, NOTE_C4,
   NOTE_G3,  NOTE_G3, NOTE_G4, NOTE_E4,  NOTE_C4, NOTE_B3,   NOTE_A3,
   NOTE_F4,  NOTE_F4, NOTE_E4, NOTE_C4,  NOTE_D4, NOTE_C4 
 };
-  // note durations: 4 = quarter note, 8 = eighth note, etc.:
+
 int happy_birthday_tempo[] = { 
   8,8,4,4,4,2,
   8,8,4,4,4,2,
@@ -136,7 +138,9 @@ int happy_birthday_tempo[] = {
   8,8,4,4,4,2 
 };
 
-
+/*
+ * CHU_ECH_CON
+ */
 int chu_ech_con_melody[]= {
   NOTE_C3,NOTE_A3,NOTE_G3,NOTE_A3,NOTE_C4,NOTE_A3,NOTE_C4,NOTE_G3,NOTE_F3,NOTE_G3,NOTE_A3,
   NOTE_C3,NOTE_F3,NOTE_D3,NOTE_C3,NOTE_D3,NOTE_F3,NOTE_C3,NOTE_F3,NOTE_A3,NOTE_G3,NOTE_F3,NOTE_F3,
